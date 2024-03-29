@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <style>
+    @font-face {
+      font-family: 'Roboto';
+      src: url('Roboto-Regular.ttf');
+    }
+
+  </style>
+  <style>
+
+    .no-select {
+      -webkit-user-select: none; /* Safari */
+      -ms-user-select: none; /* IE 10 and IE 11 */
+      user-select: none; /* Standard syntax */
+      font-family: Roboto;
+      font-style: normal;
+      letter-spacing: 0;
+    }
+
+    #fraza {
+      font-size: 5rem;
+      text-align: left;
+      padding-top: 3rem;
+      margin-left: 3rem;
+      opacity: 0.6;
+      font-weight: 300;
+      line-height: 5rem;
+    }
+
+    #fraza2 {
+      font-size: 4.5rem;
+      text-align: right;
+      margin-top: 31rem;
+      margin-right: 7rem;
+      opacity: 0.7;
+      position: relative;
+    }
+
+    #number {
+      font-size: 23rem;
+      text-align: right;
+      margin-top: 15rem;
+      height: 100%;
+      width: 55%;
+      position: absolute;
+    }
+
+    #bg {
+      background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url("reciclat_bg_2.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      height: 100%;
+      position: relative;
+      margin: 0;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+
+  </style>
+</head>
+<body>
+<div id="bg">
+  <div id="fraza" class="no-select">
+    Reutilizează, chiar contează!
+  </div>
+
+  <div id="number" class="no-select">0</div>
+  <div id="fraza2" class="no-select">ambalaje reutilizate</div>
+</div>
+
+<script>
+
+  var number = localStorage.getItem('pungiReciclate')
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
+  const paramValue = params.get('p');
+  if (paramValue !== null) {
+    number = Number(paramValue)
+  } else if (number === null) {
+    number = 0
+  }
+
+
+  var numberElement = document.getElementById("number");
+  var fraza = document.getElementById("fraza");
+  var fraza2 = document.getElementById("fraza2");
+
+  numberElement.innerText = number;
+
+  // Function to increment the number
+  function incrementNumber() {
+    number++;
+    numberElement.innerText = number;
+    localStorage.setItem('pungiReciclate', number);
+    //setCookie("pungiReciclate",number);
+  }
+
+  // Add click event listener to the number element
+  numberElement.addEventListener("click", incrementNumber);
+  fraza.addEventListener("click", incrementNumber);
+  fraza2.addEventListener("click", incrementNumber);
+</script>
+</body>
+</html>
